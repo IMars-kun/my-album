@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState, useTransition, useRef } from 'react'
 import { deletePhoto, updatePhoto } from '../../app/admin/albums/[id]/actions'
 import { setAlbumCover } from '../../app/admin/dashboard/actions'
+import { compressImage } from '../../lib/imageCompression'
 
 interface Photo {
     id: string
@@ -36,18 +37,30 @@ export default function PhotoManageCard({ photo, albumId, index }: Props) {
         setShowDeleteModal(false)
     }
 
-    const handleUpdate = (e: React.FormEvent) => {
+    const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault()
         const form = e.currentTarget as HTMLFormElement
         const formData = new FormData(form)
-        formData.set('photoId', photo.id)
-        formData.set('albumId', albumId)
-        formData.set('oldImageUrl', photo.image_url)
-        startTransition(() => {
-            updatePhoto(formData)
-        })
-        setShowEditModal(false)
-        setPreview(null)
+        const file = formData.get('file') as File
+
+        if (file && file.size > 0) {
+            formData.set('photoId', photo.id)
+            formData.set('albumId', albumId)
+            formData.set('oldImageUrl', photo.image_url)
+
+            startTransition(async () => {
+                try {
+                    const compressedFile = await compressImage(file)
+                    formData.set('file', compressedFile)
+                    await updatePhoto(formData)
+                    setShowEditModal(false)
+                    setPreview(null)
+                } catch (err) {
+                    console.error(err)
+                    alert('Gagal mengganti foto')
+                }
+            })
+        }
     }
 
     return (

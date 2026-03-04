@@ -97,7 +97,36 @@ export default async function AlbumDetail({
               </div>
             </div>
 
-            <form action={uploadPhoto} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                const form = e.currentTarget
+                const formData = new FormData(form)
+                const file = formData.get('file') as File
+
+                if (file) {
+                  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+                  const originalText = submitBtn.innerHTML
+                  submitBtn.disabled = true
+                  submitBtn.innerHTML = '<span>⏳</span> Kompres & Upload...'
+
+                  try {
+                    const { compressImage } = await import('../../../../lib/imageCompression')
+                    const compressedFile = await compressImage(file)
+                    formData.set('file', compressedFile)
+                    await uploadPhoto(formData)
+                    form.reset()
+                  } catch (err) {
+                    console.error(err)
+                    alert('Gagal upload foto')
+                  } finally {
+                    submitBtn.disabled = false
+                    submitBtn.innerHTML = originalText
+                  }
+                }
+              }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+            >
               <input type="hidden" name="albumId" value={albumId} />
               <div>
                 <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'rgba(255,220,225,0.55)', marginBottom: 8 }}>
