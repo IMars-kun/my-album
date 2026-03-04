@@ -3,10 +3,8 @@
 import { createClient } from '../../../../lib/serverClient'
 import { revalidatePath } from 'next/cache'
 
-const ALLOWED_EMAILS = [
-  'berlymarcellino25@gmail.com',
-  'email2@gmail.com',
-]
+import { ALLOWED_EMAILS } from '../../../../lib/auth'
+
 
 async function checkAuth() {
   const supabase = await createClient()

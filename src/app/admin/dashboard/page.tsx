@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { createAlbum } from './actions'
 import AlbumActions from '../../../components/admin/AlbumActions'
 import FloatingHearts from '../../../components/FloatingHearts'
+import { ALLOWED_EMAILS } from '../../../lib/auth'
 
 export default async function Dashboard() {
   const supabase = await createClient()
@@ -14,12 +15,7 @@ export default async function Dashboard() {
 
   if (!user) redirect('/admin/login')
 
-  const allowedEmails = [
-    'berlymarcellino25@gmail.com',
-    'email2@gmail.com',
-  ]
-
-  if (!user.email || !allowedEmails.includes(user.email)) {
+  if (!user.email || !ALLOWED_EMAILS.includes(user.email)) {
     redirect('/')
   }
 
