@@ -1,0 +1,38 @@
+create table if not exists public.albums (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text,
+  owner_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz default now()
+);
+
+create index if not exists idx_albums_owner
+on public.albums(owner_id);
+
+=======================================================================================
+
+create table if not exists public.photos (
+  id uuid primary key default gen_random_uuid(),
+  album_id uuid not null references public.albums(id) on delete cascade,
+  image_url text not null,
+  uploaded_by uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz default now()
+);
+
+create index if not exists idx_photos_album
+on public.photos(album_id);
+
+=======================================================================================
+
+insert into public.albums (title, description, owner_id)
+values (
+  'Test Album',
+  'Album pertama',
+  '1d9308cf-bb7f-4484-9cda-9ec098ca5c31'
+);
+
+=======================================================================================
+
+alter table public.albums enable row level security;
+alter table public.photos enable row level security;
+
