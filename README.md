@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 💕 M Love
+### *Every Moment, Together With You*
 
-First, run the development server:
+**A Premium, Romantic Photo Gallery & Portfolio**
 
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS_4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+---
+
+[Lihat Album Kita](/gallery) • [Admin Dashboard](/admin/login)
+
+</div>
+
+## ✨ Overview
+
+**M Love** is a modern, immersive photo gallery application designed to preserve and showcase your most precious memories. Built with a "premium-first" design philosophy, it features smooth animations, a romantic aesthetic, and a robust backend for managing your collection.
+
+## 🚀 Features
+
+- **🌸 Romantic UI/UX**: Custom-designed theme with floating heart animations, glassmorphism, and a refined color palette.
+- **📸 Dynamic Gallery**: A beautiful, responsive grid layout for browsing albums and photos.
+- **🖼️ Lightbox Experience**: Full-screen photo viewing with smooth transitions and high-resolution support.
+- **🔐 Secret Admin Panel**: Secure dashboard for the "owner" to manage albums and upload photos.
+- **⚡ Full CRUD Operations**: Easily create, read, update, and delete albums and photos.
+- **📱 Mobile Optimized**: Fluid responsiveness across all devices, from small phones to large monitors.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Database & Auth**: [Supabase](https://supabase.com/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & Vanilla CSS
+- **Programming Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Image Compression**: [browser-image-compression](https://www.npmjs.com/package/browser-image-compression)
+
+## 🛠️ Local Development
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/imarskun/my-album.git
+cd my-album
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Setup Environment Variables
+Create a `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Database Setup
+Run the SQL queries found in the [`sqlnya`](file:///home/imarskun/Documents/Programming/my-album/sqlnya) file in your Supabase SQL Editor to initialize the `albums` and `photos` tables.
 
-## Learn More
+### 5. Run the development server
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to see your gallery in action!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app`: Next.js App Router pages and layouts.
+- `src/components`: Reusable UI components (Navbar, Gallery, Admin tools).
+- `src/lib`: Supabase client and utility functions.
+- `src/types`: TypeScript definitions for data models.
+- `public`: Static assets and icons.
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is private and intended for personal use.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+<div align="center">
+Made with ❤️ by [IMars-kun](https://github.com/imarskun)
+</div>
