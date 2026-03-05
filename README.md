@@ -12,7 +12,7 @@
 
 ---
 
-[Lihat Album Kita](/gallery) • [Admin Dashboard](/admin/login)
+[Lihat Album Kita](https://marceila.imarskun.my.id/gallery)
 
 </div>
 
