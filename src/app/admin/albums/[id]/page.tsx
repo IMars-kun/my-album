@@ -41,7 +41,7 @@ export default async function AlbumDetail({
         style={{
           background: 'linear-gradient(to bottom, rgba(159,18,57,0.1), transparent)',
           borderBottom: '1px solid rgba(244,63,94,0.08)',
-          padding: '32px 40px',
+          padding: 'clamp(24px, 5vw, 32px) clamp(20px, 5vw, 40px)',
         }}
       >
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -79,11 +79,14 @@ export default async function AlbumDetail({
         </div>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '36px 40px 80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 320px) 1fr', gap: 32, alignItems: 'start' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(24px, 5vw, 36px) clamp(20px, 5vw, 40px) 80px' }}>
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-[320px_1fr]" 
+          style={{ gap: 32, alignItems: 'start' }}
+        >
 
           {/* ── Upload Form ── */}
-          <div className="glass" style={{ borderRadius: 22, padding: '28px', position: 'sticky', top: 84, border: '1px solid rgba(244,63,94,0.1)' }}>
+          <div className="glass lg:sticky lg:top-[84px]" style={{ borderRadius: 22, padding: '28px', border: '1px solid rgba(244,63,94,0.1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <div style={{
                 width: 44, height: 44, borderRadius: 12,

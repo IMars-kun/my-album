@@ -35,7 +35,7 @@ export default async function Dashboard() {
         style={{
           background: 'linear-gradient(to bottom, rgba(159,18,57,0.1), transparent)',
           borderBottom: '1px solid rgba(244,63,94,0.08)',
-          padding: '32px 40px',
+          padding: 'clamp(24px, 5vw, 32px) clamp(20px, 5vw, 40px)',
         }}
       >
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
@@ -63,15 +63,13 @@ export default async function Dashboard() {
       </div>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(24px, 5vw, 40px) clamp(20px, 5vw, 40px) 80px' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(300px, 100%, 360px), 1fr))',
-          gap: 32,
-          alignItems: 'start'
-        }}>
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-[360px_1fr]" 
+          style={{ gap: 32, alignItems: 'start' }}
+        >
 
           {/* ── Create Album Form ── */}
-          <div className="glass" style={{ borderRadius: 22, padding: '28px', position: 'sticky', top: 84, border: '1px solid rgba(244,63,94,0.1)' }}>
+          <div className="glass lg:sticky lg:top-[84px]" style={{ borderRadius: 22, padding: '28px', border: '1px solid rgba(244,63,94,0.1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <div style={{
                 width: 42, height: 42, borderRadius: 12,
