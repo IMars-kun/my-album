@@ -12,7 +12,7 @@
 
 ---
 
-[Lihat Album Kita](/gallery) • [Admin Dashboard](/admin/login)
+[Lihat Album Kita](https://marceila.imarskun.my.id/gallery)
 
 </div>
 
@@ -83,5 +83,5 @@ This project is private and intended for personal use.
 ---
 
 <div align="center">
-Made with ❤️ by [IMars-kun](https://github.com/imarskun)
+Made with ❤️ by [IMars-kun](https://github.com/IMars-kun)
 </div>
