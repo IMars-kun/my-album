@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useState, useTransition, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { updateAlbum, deleteAlbum } from '../../app/admin/dashboard/actions'
 
 interface Album {
@@ -18,6 +19,11 @@ export default function AlbumActions({ album }: Props) {
     const [showEdit, setShowEdit] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
     const [isPending, startTransition] = useTransition()
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     return (
         <>
@@ -57,13 +63,13 @@ export default function AlbumActions({ album }: Props) {
             </div>
 
             {/* ── Edit Modal ── */}
-            {showEdit && (
+            {mounted && showEdit && createPortal(
                 <div
                     onClick={() => setShowEdit(false)}
                     style={{
                         position: 'fixed', inset: 0,
                         background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)',
-                        zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center',
                         padding: 24, animation: 'fadeIn 0.2s ease',
                     }}
                 >
@@ -125,17 +131,18 @@ export default function AlbumActions({ album }: Props) {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
 
             {/* ── Delete Confirm Modal ── */}
-            {showDelete && (
+            {mounted && showDelete && createPortal(
                 <div
                     onClick={() => setShowDelete(false)}
                     style={{
                         position: 'fixed', inset: 0,
                         background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)',
-                        zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center',
                         padding: 24, animation: 'fadeIn 0.2s ease',
                     }}
                 >
@@ -184,7 +191,8 @@ export default function AlbumActions({ album }: Props) {
                             </button>
                         </form>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     )

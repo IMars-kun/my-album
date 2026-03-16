@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useTransition, useRef } from 'react'
+import { useState, useTransition, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { deletePhoto, updatePhoto } from '../../app/admin/albums/[id]/actions'
 import { setAlbumCover } from '../../app/admin/dashboard/actions'
 import { compressImage } from '../../lib/imageCompression'
@@ -24,6 +25,11 @@ export default function PhotoManageCard({ photo, albumId, index }: Props) {
     const [preview, setPreview] = useState<string | null>(null)
     const [isPending, startTransition] = useTransition()
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     const handleDelete = (e: React.FormEvent) => {
         e.preventDefault()
@@ -214,11 +220,11 @@ export default function PhotoManageCard({ photo, albumId, index }: Props) {
             </div>
 
             {/* ── Delete Modal ── */}
-            {showDeleteModal && (
+            {mounted && showDeleteModal && createPortal(
                 <div
                     onClick={() => setShowDeleteModal(false)}
                     style={{
-                        position: 'fixed', inset: 0, zIndex: 300,
+                        position: 'fixed', inset: 0, zIndex: 9999,
                         background: 'rgba(0,0,0,0.8)',
                         backdropFilter: 'blur(8px)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -279,15 +285,16 @@ export default function PhotoManageCard({ photo, albumId, index }: Props) {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
 
             {/* ── Edit/Replace Modal ── */}
-            {showEditModal && (
+            {mounted && showEditModal && createPortal(
                 <div
                     onClick={() => { setShowEditModal(false); setPreview(null) }}
                     style={{
-                        position: 'fixed', inset: 0, zIndex: 300,
+                        position: 'fixed', inset: 0, zIndex: 9999,
                         background: 'rgba(0,0,0,0.8)',
                         backdropFilter: 'blur(8px)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -401,7 +408,8 @@ export default function PhotoManageCard({ photo, albumId, index }: Props) {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     )
